@@ -2,13 +2,19 @@ package com.ws.medical.patients.Controller;
 
 import com.ws.medical.patients.Consultation;
 import com.ws.medical.patients.Model.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
 @RestController
 public class Controller_Patient {
+	
+	static {
+		createPatient("Jean", "Ragueneau", "1222222222222");
+		createPatient("Sarujan", "Rajaratnam", "1222252222422");
+		createPatient("Pierre", "Villiers", "1222252222222");
+	}
+	
 	/* CREATE */
 	public static void createPatient (String first_name, String last_name, String num_sec_soc) {
 		new Patient(first_name, last_name, num_sec_soc);
@@ -21,14 +27,13 @@ public class Controller_Patient {
 	
 	@GetMapping("/patients")
 	public static ArrayList<Patient> getAllPatients () {
-		createPatient("Jean", "Ragueneau", "1222222222222");
 		return Patient.getPatientsList();
 	}
 	
-		@GetMapping("/patient/{id}")
-	public static Patient getPatientsById (String id) {
+	@GetMapping("/patient/{id}")
+	public static Patient getPatientsById (@PathVariable int id) {
 		for(Patient patient : Patient.getPatientsList()) {
-			if (id.equals(patient.getId())) {
+			if (id == patient.getId()) {
 				return patient;
 			}
 		}

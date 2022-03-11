@@ -22,7 +22,12 @@ public class Patient {
 	}
 	
 	public Patient (String first_name, String last_name, String num_sec_soc) {
-		this.id = this.hashCode();
+		if (patientsList.size() == 0) {
+			this.id = 0;
+		}
+		else {
+			this.id = patientsList.get(patientsList.size() - 1).getId() + 1;
+		}
 		this.firstName = first_name.strip();
 		this.lastName = last_name.strip();
 		this.numSecSoc = num_sec_soc.strip();
