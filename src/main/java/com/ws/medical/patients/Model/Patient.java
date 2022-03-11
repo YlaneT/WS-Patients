@@ -2,13 +2,16 @@ package com.ws.medical.patients.Model;
 
 import com.ws.medical.patients.Consultation;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 
 @Data
+@Entity
 public class Patient {
 	private static ArrayList<Patient> patientsList = new ArrayList<>();
-	
+	@Id
 	private int                     id;
 	private ArrayList<Disease>      diseases;
 	private ArrayList<Consultation> consults;
